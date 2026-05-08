@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-glass-white: rgba(255, 255, 255, 0.05);
+  --color-glass-dark: rgba(15, 15, 15, 0.7);
+  --color-accent: #f59e0b; /* Amber/Gold for premium feel */
+  
+  --radius-ios: 20px;
+  --radius-ios-large: 32px;
+
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@utility glass {
+  background: var(--color-glass-white);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+@utility glass-dark {
+  background: var(--color-glass-dark);
+  backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+}
+
+@utility glass-morphic {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(245, 158, 11, 0.05);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans bg-[#0c0c0c] text-white selection:bg-amber-500/30 overflow-x-hidden w-screen;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Premium typography with larger base sizes for mobile */
+.text-responsive-h1 {
+  font-size: clamp(3.5rem, 10vw + 1rem, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.text-responsive-h2 {
+  font-size: clamp(2.5rem, 6vw + 1rem, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.text-responsive-p {
+  font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
+}
+
+.iphone-widget {
+  @apply glass rounded-[24px] p-6 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}

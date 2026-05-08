@@ -1,0 +1,6 @@
+{
+  "name": "Cutlaw Construction - AI Lead Gen",
+  "description": "Premium AI-powered construction website featuring glassmorphic, iOS-inspired design and an intelligent assistant for automated quotes, leads, and bookings.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["AI Agent", "Image Analysis", "Lead Generation"]
+}
