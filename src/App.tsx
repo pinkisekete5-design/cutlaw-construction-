@@ -19,6 +19,13 @@ import LineWaves from './components/LineWaves';
 import BorderGlow from './components/BorderGlow';
 import QuoteForm from './components/QuoteForm';
 
+// Import images for production build optimization
+import imgMiningConstruction from './assets/images/mining-construction.png';
+import imgStructuralSteel from './assets/images/structural-steel.png';
+import imgCivilEarthworks from './assets/images/civil-earthworks.png';
+import imgMiningRehabBefore from './assets/images/mining-rehab-before.png';
+import imgMiningRehabAfter from './assets/images/mining-rehab-after.png';
+
 // --- Shared Components ---
 
 const GlassCard = ({ children, className, delay = 0, borderRadius = 32 }: { children: React.ReactNode, className?: string, delay?: number, borderRadius?: number, key?: any }) => (
@@ -193,7 +200,7 @@ const App = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-amber-500 text-[10px] md:text-sm font-bold uppercase tracking-[0.3em] backdrop-blur-md"
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-amber-500 text-sm font-bold uppercase tracking-[0.3em] backdrop-blur-md"
             >
               <Zap className="w-3 h-3 md:w-4 md:h-4 fill-amber-500" /> Premium Industry Leaders
             </motion.div>
@@ -250,8 +257,8 @@ const App = () => {
           </motion.div>
 
           {/* Smart Dashboard Mockup */}
-          <motion.div style={{ scale: heroScale }} className="flex flex-col gap-6 md:gap-10 h-full w-full max-w-2xl mx-auto lg:mx-0">
-            <div className="space-y-6 md:space-y-8 pt-4 md:pt-8 w-full">
+          <motion.div style={{ scale: heroScale }} className="flex flex-col gap-10 h-full w-full max-w-2xl mx-auto lg:mx-0">
+            <div className="space-y-8 pt-8 w-full">
               <motion.div 
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
@@ -300,6 +307,7 @@ const App = () => {
               </div>
             </div>
           </motion.div>
+
         </div>
       </section>
 
@@ -324,19 +332,19 @@ const App = () => {
               title: 'Mining Construction', 
               desc: 'Specialized structural and civil work for mining operations across South Africa.',
               icon: <Building2 className="w-8 h-8" />,
-              img: '/src/assets/images/regenerated_image_1778266860150.png'
+              img: imgMiningConstruction
             },
             { 
               title: 'Structural Steel', 
               desc: 'Premium precision-engineered steel structures designed for maximum durability.',
               icon: <Zap className="w-8 h-8" />,
-              img: '/src/assets/images/regenerated_image_1778266880926.png'
+              img: imgStructuralSteel
             },
             { 
               title: 'Civil & Earthworks', 
               desc: 'Complete site preparation, foundation, and infrastructure development.',
               icon: <MapPin className="w-8 h-8" />,
-              img: '/src/assets/images/regenerated_image_1778266918216.png'
+              img: imgCivilEarthworks
             }
           ].map((s, i) => (
             <GlassCard key={i} className="group hover:bg-white/5 transition-all">
@@ -433,8 +441,8 @@ const App = () => {
             { 
               title: "Mining Facility Rehabilitation", 
               location: "Randfontein West",
-              before: "/src/assets/images/regenerated_image_1778267732418.png",
-              after: "/src/assets/images/regenerated_image_1778267745636.png"
+              before: imgMiningRehabBefore,
+              after: imgMiningRehabAfter
             },
             { 
               title: "Structural Steel Expansion", 
