@@ -73,10 +73,16 @@
   @apply glass rounded-[24px] p-6 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
+
 ::-webkit-scrollbar-track {
   background: #111;
 }

@@ -168,7 +168,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
-            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-10"
+            className="w-full max-w-7xl max-h-[95vh] overflow-y-auto relative z-10 scrollbar-hide"
           >
             <BorderGlow 
               borderRadius={40}
@@ -176,10 +176,10 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
               glowColor="40 100 50"
               colors={['#f59e0b', '#ffffff', '#f59e0b']}
             >
-              <div className="glass-dark p-8 md:p-12 relative overflow-hidden">
+              <div className="glass-dark p-8 sm:p-14 md:p-20 relative overflow-hidden">
                 {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 blur-[80px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
 
                 <div className="flex justify-between items-start mb-10">
                   <div className="space-y-2">
@@ -216,10 +216,10 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: -20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1 flex items-center gap-2">
-                        <User className="w-3 h-3" /> Full Name*
+                      <label className="text-base uppercase font-bold text-white/60 ml-1 flex items-center gap-2">
+                        <User className="w-5 h-5 text-amber-500" /> Full Name*
                       </label>
                       <input 
                         autoFocus
@@ -228,22 +228,22 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         onChange={handleInputChange}
                         placeholder="Enter your full name"
                         className={cn(
-                          "w-full bg-white/5 border rounded-2xl px-5 py-4 focus:outline-none transition-all text-white focus:ring-4 focus:ring-amber-500/20",
+                          "w-full bg-white/5 border rounded-2xl px-6 py-6 focus:outline-none transition-all text-white text-xl focus:ring-4 focus:ring-amber-500/20",
                           errors.fullName ? "border-red-500/50" : "border-white/10 focus:border-amber-500/50"
                         )}
                       />
                     </motion.div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <motion.div 
                         variants={{
                           hidden: { opacity: 0, x: -20 },
                           visible: { opacity: 1, x: 0 }
                         }}
-                        className="space-y-2"
+                        className="space-y-3"
                       >
-                        <label className="text-[10px] uppercase font-bold text-white/40 ml-1 flex items-center gap-2">
-                          <Phone className="w-3 h-3" /> Phone*
+                        <label className="text-base uppercase font-bold text-white/60 ml-1 flex items-center gap-2">
+                          <Phone className="w-5 h-5 text-amber-500" /> Phone*
                         </label>
                         <input 
                           name="phone"
@@ -251,7 +251,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                           onChange={handleInputChange}
                           placeholder="Enter your phone number"
                           className={cn(
-                            "w-full bg-white/5 border rounded-2xl px-5 py-4 focus:outline-none transition-all text-white focus:ring-4 focus:ring-amber-500/20",
+                            "w-full bg-white/5 border rounded-2xl px-6 py-6 focus:outline-none transition-all text-white text-xl focus:ring-4 focus:ring-amber-500/20",
                             errors.phone ? "border-red-500/50" : "border-white/10 focus:border-amber-500/50"
                           )}
                         />
@@ -261,10 +261,10 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                           hidden: { opacity: 0, x: -20 },
                           visible: { opacity: 1, x: 0 }
                         }}
-                        className="space-y-2"
+                        className="space-y-3"
                       >
-                        <label className="text-[10px] uppercase font-bold text-white/40 ml-1 flex items-center gap-2">
-                          <Mail className="w-3 h-3" /> Email*
+                        <label className="text-base uppercase font-bold text-white/60 ml-1 flex items-center gap-2">
+                          <Mail className="w-5 h-5 text-amber-500" /> Email*
                         </label>
                         <input 
                           name="email"
@@ -272,7 +272,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                           onChange={handleInputChange}
                           placeholder="Enter your email address"
                           className={cn(
-                            "w-full bg-white/5 border rounded-2xl px-5 py-4 focus:outline-none transition-all text-white focus:ring-4 focus:ring-amber-500/20",
+                            "w-full bg-white/5 border rounded-2xl px-6 py-6 focus:outline-none transition-all text-white text-xl focus:ring-4 focus:ring-amber-500/20",
                             errors.email ? "border-red-500/50" : "border-white/10 focus:border-amber-500/50"
                           )}
                         />
@@ -284,10 +284,10 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: -20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1 flex items-center gap-2">
-                        <MapPin className="w-3 h-3" /> Project Location*
+                      <label className="text-base uppercase font-bold text-white/60 ml-1 flex items-center gap-2">
+                        <MapPin className="w-5 h-5 text-amber-500" /> Project Location*
                       </label>
                       <input 
                         name="location"
@@ -295,7 +295,7 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         onChange={handleInputChange}
                         placeholder="Enter project location"
                         className={cn(
-                          "w-full bg-white/5 border rounded-2xl px-5 py-4 focus:outline-none transition-all text-white focus:ring-4 focus:ring-amber-500/20",
+                          "w-full bg-white/5 border rounded-2xl px-6 py-6 focus:outline-none transition-all text-white text-xl focus:ring-4 focus:ring-amber-500/20",
                           errors.location ? "border-red-500/50" : "border-white/10 focus:border-amber-500/50"
                         )}
                       />
@@ -306,18 +306,18 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: -20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1 flex items-center gap-2">
-                        <FileText className="w-3 h-3" /> Project Description
+                      <label className="text-base uppercase font-bold text-white/60 ml-1 flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-amber-500" /> Project Description
                       </label>
                       <textarea 
                         name="description"
                         value={formData.description}
                         onChange={handleInputChange}
-                        rows={6}
+                        rows={8}
                         placeholder="Briefly describe your construction project or requirements…"
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white resize-none focus:ring-4 focus:ring-amber-500/20"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl resize-none focus:ring-4 focus:ring-amber-500/20"
                       />
                     </motion.div>
                   </motion.div>
@@ -340,20 +340,23 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: 20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1">Project Type</label>
-                      <select 
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleInputChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white appearance-none focus:ring-4 focus:ring-amber-500/20"
-                      >
-                        <option value="" disabled className="bg-neutral-900">Select Project Type</option>
-                        {PROJECT_TYPES.map(type => (
-                          <option key={type} value={type} className="bg-neutral-900">{type}</option>
-                        ))}
-                      </select>
+                      <label className="text-base uppercase font-bold text-white/60 ml-1">Project Type</label>
+                      <div className="relative group/select">
+                        <select 
+                          name="projectType"
+                          value={formData.projectType}
+                          onChange={handleInputChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl appearance-none focus:ring-4 focus:ring-amber-500/20 pr-12"
+                        >
+                          <option value="" disabled className="bg-neutral-900">Select Project Type</option>
+                          {PROJECT_TYPES.map(type => (
+                            <option key={type} value={type} className="bg-neutral-900">{type}</option>
+                          ))}
+                        </select>
+                        <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-7 h-7 text-white/20 group-hover/select:text-amber-500 transition-colors rotate-90 pointer-events-none" />
+                      </div>
                     </motion.div>
 
                     <motion.div 
@@ -361,20 +364,23 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: 20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1">Service Required</label>
-                      <select 
-                        name="serviceRequired"
-                        value={formData.serviceRequired}
-                        onChange={handleInputChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white appearance-none focus:ring-4 focus:ring-amber-500/20"
-                      >
-                        <option value="" disabled className="bg-neutral-900">Select Service Required</option>
-                        {SERVICES_REQUIRED.map(service => (
-                          <option key={service} value={service} className="bg-neutral-900">{service}</option>
-                        ))}
-                      </select>
+                      <label className="text-base uppercase font-bold text-white/60 ml-1">Service Required</label>
+                      <div className="relative group/select">
+                        <select 
+                          name="serviceRequired"
+                          value={formData.serviceRequired}
+                          onChange={handleInputChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl appearance-none focus:ring-4 focus:ring-amber-500/20 pr-12"
+                        >
+                          <option value="" disabled className="bg-neutral-900">Select Service Required</option>
+                          {SERVICES_REQUIRED.map(service => (
+                            <option key={service} value={service} className="bg-neutral-900">{service}</option>
+                          ))}
+                        </select>
+                        <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-7 h-7 text-white/20 group-hover/select:text-amber-500 transition-colors rotate-90 pointer-events-none" />
+                      </div>
                     </motion.div>
 
                     <motion.div 
@@ -382,62 +388,71 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                         hidden: { opacity: 0, x: 20 },
                         visible: { opacity: 1, x: 0 }
                       }}
-                      className="space-y-2"
+                      className="space-y-3"
                     >
-                      <label className="text-[10px] uppercase font-bold text-white/40 ml-1">Project Size</label>
-                      <select 
-                        name="projectSize"
-                        value={formData.projectSize}
-                        onChange={handleInputChange}
-                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white appearance-none focus:ring-4 focus:ring-amber-500/20"
-                      >
-                        <option value="" disabled className="bg-neutral-900">Select Project Size</option>
-                        {PROJECT_SIZES.map(size => (
-                          <option key={size} value={size} className="bg-neutral-900">{size}</option>
-                        ))}
-                      </select>
+                      <label className="text-base uppercase font-bold text-white/60 ml-1">Project Size</label>
+                      <div className="relative group/select">
+                        <select 
+                          name="projectSize"
+                          value={formData.projectSize}
+                          onChange={handleInputChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl appearance-none focus:ring-4 focus:ring-amber-500/20 pr-12"
+                        >
+                          <option value="" disabled className="bg-neutral-900">Select Project Size</option>
+                          {PROJECT_SIZES.map(size => (
+                            <option key={size} value={size} className="bg-neutral-900">{size}</option>
+                          ))}
+                        </select>
+                        <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-7 h-7 text-white/20 group-hover/select:text-amber-500 transition-colors rotate-90 pointer-events-none" />
+                      </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <motion.div 
                         variants={{
                           hidden: { opacity: 0, x: 20 },
                           visible: { opacity: 1, x: 0 }
                         }}
-                        className="space-y-2"
+                        className="space-y-3"
                       >
-                        <label className="text-[10px] uppercase font-bold text-white/40 ml-1">Est. Budget</label>
-                        <select 
-                          name="budget"
-                          value={formData.budget}
-                          onChange={handleInputChange}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white appearance-none focus:ring-4 focus:ring-amber-500/20"
-                        >
-                          <option value="" disabled className="bg-neutral-900">Select Budget</option>
-                          {BUDGET_RANGES.map(range => (
-                            <option key={range} value={range} className="bg-neutral-900">{range}</option>
-                          ))}
-                        </select>
+                        <label className="text-base uppercase font-bold text-white/60 ml-1">Est. Budget</label>
+                        <div className="relative group/select">
+                          <select 
+                            name="budget"
+                            value={formData.budget}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl appearance-none focus:ring-4 focus:ring-amber-500/20 pr-12"
+                          >
+                            <option value="" disabled className="bg-neutral-900">Select Budget</option>
+                            {BUDGET_RANGES.map(range => (
+                              <option key={range} value={range} className="bg-neutral-900">{range}</option>
+                            ))}
+                          </select>
+                          <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-7 h-7 text-white/20 group-hover/select:text-amber-500 transition-colors rotate-90 pointer-events-none" />
+                        </div>
                       </motion.div>
                       <motion.div 
                         variants={{
                           hidden: { opacity: 0, x: 20 },
                           visible: { opacity: 1, x: 0 }
                         }}
-                        className="space-y-2"
+                        className="space-y-3"
                       >
-                        <label className="text-[10px] uppercase font-bold text-white/40 ml-1">Timeline</label>
-                        <select 
-                          name="timeline"
-                          value={formData.timeline}
-                          onChange={handleInputChange}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-amber-500/50 transition-all text-white appearance-none focus:ring-4 focus:ring-amber-500/20"
-                        >
-                          <option value="" disabled className="bg-neutral-900">Select Timeline</option>
-                          {TIMELINES.map(time => (
-                            <option key={time} value={time} className="bg-neutral-900">{time}</option>
-                          ))}
-                        </select>
+                        <label className="text-base uppercase font-bold text-white/60 ml-1">Timeline</label>
+                        <div className="relative group/select">
+                          <select 
+                            name="timeline"
+                            value={formData.timeline}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-6 focus:outline-none focus:border-amber-500/50 transition-all text-white text-xl appearance-none focus:ring-4 focus:ring-amber-500/20 pr-12"
+                          >
+                            <option value="" disabled className="bg-neutral-900">Select Timeline</option>
+                            {TIMELINES.map(time => (
+                              <option key={time} value={time} className="bg-neutral-900">{time}</option>
+                            ))}
+                          </select>
+                          <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 w-7 h-7 text-white/20 group-hover/select:text-amber-500 transition-colors rotate-90 pointer-events-none" />
+                        </div>
                       </motion.div>
                     </div>
 
@@ -485,18 +500,18 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ isOpen, onClose }) => {
                        </div>
 
                        <motion.button
-                        whileHover={{ scale: 1.02, boxShadow: '0 0 50px rgba(245,158,11,0.4)' }}
+                        whileHover={{ scale: 1.02, boxShadow: '0 0 70px rgba(245,158,11,0.5)' }}
                         whileTap={{ scale: 0.98 }}
                         disabled={isSubmitting}
-                        className="w-full lg:w-auto px-16 py-6 bg-amber-500 text-black text-xl font-black rounded-3xl flex items-center justify-center gap-3 disabled:opacity-50 transition-all shadow-[0_10px_40px_rgba(245,158,11,0.2)] glass-morphic border border-amber-400/50"
+                        className="w-full lg:w-auto px-20 py-8 bg-amber-500 text-black text-2xl font-black rounded-3xl flex items-center justify-center gap-4 disabled:opacity-50 transition-all shadow-[0_15px_60px_rgba(245,158,11,0.3)] glass-morphic border border-amber-400/50"
                        >
                          {isSubmitting ? (
                            <>
-                             <Loader2 className="w-6 h-6 animate-spin" /> Processing...
+                             <Loader2 className="w-8 h-8 animate-spin" /> Processing...
                            </>
                          ) : (
                            <>
-                              Request My Quote <ChevronRight className="w-6 h-6" />
+                              Request My Quote <ChevronRight className="w-8 h-8" />
                            </>
                          )}
                        </motion.button>

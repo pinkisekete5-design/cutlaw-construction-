@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
 import { 
   Building2, 
   HardHat, 
@@ -18,6 +18,8 @@ import { cn } from './lib/utils';
 import LineWaves from './components/LineWaves';
 import BorderGlow from './components/BorderGlow';
 import QuoteForm from './components/QuoteForm';
+import CustomCursor from './components/CustomCursor';
+import Preloader from './components/Preloader';
 
 // Import images for production build optimization
 import imgMiningConstruction from './assets/images/mining-construction.png';
@@ -28,55 +30,90 @@ import imgMiningRehabAfter from './assets/images/mining-rehab-after.png';
 
 // --- Shared Components ---
 
-const GlassCard = ({ children, className, delay = 0, borderRadius = 32 }: { children: React.ReactNode, className?: string, delay?: number, borderRadius?: number, key?: any }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -10 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ 
-      duration: 0.8, 
-      delay, 
-      ease: [0.16, 1, 0.3, 1] // Custom cubic-bezier for premium feel
-    }}
-    className="w-full h-full"
-  >
-    <BorderGlow 
-      borderRadius={borderRadius}
-      glowColor="40 100 50"
-      colors={['#f59e0b', '#ffffff', '#f59e0b']}
-      className={cn("w-full h-full transition-shadow duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]", className)}
+const GlassCard = ({ children, className, delay = 0, borderRadius = 32 }: { children: React.ReactNode, className?: string, delay?: number, borderRadius?: number, key?: any }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = (mouseX / width - 0.5) * 200;
+    const yPct = (mouseY / height - 0.5) * 200;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ 
+        rotateX, 
+        rotateY, 
+        transformStyle: "preserve-3d",
+        perspective: 1000 
+      }}
+      transition={{ 
+        duration: 0.8, 
+        delay, 
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      className="w-full h-full will-change-transform"
     >
-      <div className="glass h-full w-full overflow-hidden">
-        {children}
-      </div>
-    </BorderGlow>
-  </motion.div>
-);
+      <BorderGlow 
+        borderRadius={borderRadius}
+        glowColor="40 100 50"
+        colors={['#f59e0b', '#ffffff', '#f59e0b']}
+        className={cn("w-full h-full transition-shadow duration-500 hover:shadow-[0_20px_80px_rgba(245,158,11,0.15)]", className)}
+      >
+        <div 
+          style={{ transform: "translateZ(50px)" }}
+          className="glass h-full w-full overflow-hidden"
+        >
+          {children}
+        </div>
+      </BorderGlow>
+    </motion.div>
+  );
+};
 
 const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string }) => (
-  <div className="mb-12 relative">
+  <div className="mb-16 relative">
     <motion.div
       initial={{ width: 0 }}
-      whileInView={{ width: '40px' }}
+      whileInView={{ width: '60px' }}
       viewport={{ once: true }}
-      className="h-1 bg-amber-500 mb-4 rounded-full"
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      className="h-1 bg-amber-500 mb-6 rounded-full"
     />
     <motion.span 
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: 0.2 }}
-      className="text-amber-500 font-medium tracking-widest uppercase text-[10px] mb-2 block"
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="text-amber-500 font-bold tracking-[0.4em] uppercase text-[10px] mb-3 block"
     >
       {subtitle}
     </motion.span>
     <motion.h2 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1], duration: 0.8 }}
-      className="text-responsive-h2 font-display font-bold text-white tracking-tighter"
+      transition={{ delay: 0.3, ease: [0.16, 1, 0.3, 1], duration: 1 }}
+      className="text-responsive-h2 font-display font-bold text-white tracking-tighter leading-tight"
     >
       {title}
     </motion.h2>
@@ -85,7 +122,7 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string 
 
 // --- Main Sections ---
 
-const App = () => {
+const SiteContent = () => {
   const [isQuoteFormOpen, setIsQuoteFormOpen] = React.useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   
@@ -105,8 +142,23 @@ const App = () => {
   const navPadding = useTransform(scrollY, [0, 50], ["32px", "16px"]);
   const navScale = useTransform(scrollY, [0, 50], [1, 0.95]);
 
+  const { scrollYProgress: pageScrollYProgress } = useScroll();
+  const scaleX = useSpring(pageScrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
-    <div className="min-h-screen relative">
+    <>
+      <CustomCursor />
+      
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-amber-500 origin-left z-[100]"
+        style={{ scaleX }}
+      />
+
       {/* Background with Ambient Effects */}
       <div className="fixed inset-0 -z-10 bg-[#0c0c0c] overflow-hidden">
         <motion.div 
@@ -133,6 +185,9 @@ const App = () => {
 
       {/* Navigation */}
       <motion.nav 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         style={{ paddingTop: navPadding, paddingBottom: navPadding }}
         className="fixed top-0 w-full z-40 px-4 md:px-6 transition-all flex justify-center"
       >
@@ -205,23 +260,23 @@ const App = () => {
               <Zap className="w-3 h-3 md:w-4 md:h-4 fill-amber-500" /> Premium Industry Leaders
             </motion.div>
             <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.2, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               style={{ 
                 fontStyle: 'italic', 
                 fontFamily: '"Times New Roman", Times, serif', 
                 fontWeight: 'normal',
                 lineHeight: '1.1',
               }}
-              className="text-white tracking-tighter text-left text-responsive-h1"
+              className="text-white tracking-tighter text-left text-responsive-h1 will-change-transform"
             >
               Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200">Construction.</span> Built for Scale.
             </motion.h1>
             <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 1 }}
               className="text-white/60 text-responsive-p max-w-xl leading-relaxed font-light"
             >
               Mining, structural steel, and civil construction specialists delivering industrial excellence across Sub-Saharan Africa.
@@ -312,7 +367,8 @@ const App = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-6 max-w-7xl mx-auto rounded-[60px] bg-black border border-white">
+      <section id="services" className="py-24 px-6 max-w-7xl mx-auto rounded-[60px] bg-black border border-white/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-amber-500/5 blur-[120px] pointer-events-none" />
         <SectionHeading title="Comprehensive Solutions" subtitle="What We Do" />
         <motion.div 
           initial="hidden"
@@ -657,6 +713,29 @@ const App = () => {
 
       {/* Forms and Overlays */}
       <QuoteForm isOpen={isQuoteFormOpen} onClose={() => setIsQuoteFormOpen(false)} />
+    </>
+  );
+};
+
+const App = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  return (
+    <div className="min-h-screen relative selection:bg-amber-500 selection:text-black">
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <SiteContent />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
